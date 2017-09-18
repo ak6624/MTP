@@ -354,7 +354,7 @@ void print_entries_LL() {
   struct vid_addr_tuple *current;
   int tracker = MAX_MAIN_VID_TBL_PATHS;
 
-  printf("\n-----------Main VID Table-----------\n");
+  printf("\n------------Main VID Table------------\n");
   printf("MT_VID\t\t\t\tEthname\t\t\tPath Cost\tMembership\tMAC\n");
 
   for (current = main_vid_tbl_head; current != NULL; current = current->next) {
@@ -817,7 +817,7 @@ void print_entries_lbcast_LL() {
   struct local_bcast_tuple *current;
 
 
-  printf("\n-----Local Host Broadcast Table-----\n");
+  printf("\n------Local Host Broadcast Table------\n");
   printf("PORT\n");
 
   for (current = local_bcast_head; current != NULL; current = current->next) {
