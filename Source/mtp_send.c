@@ -7,6 +7,9 @@
 
 
 int ctrlSend(char *etherPort, uint8_t *inPayload, int payloadLen, int vlanID) {
+
+if (vlanID == 1)
+{
 	int frame_Size = -1;
 
 	int sockfd;
@@ -93,6 +96,9 @@ int ctrlSend(char *etherPort, uint8_t *inPayload, int payloadLen, int vlanID) {
 
 	free(eh);
 	close(sockfd);
+	return 0;
+}
+else
 	return 0;
 }
 
