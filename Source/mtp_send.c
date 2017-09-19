@@ -8,7 +8,7 @@
 
 int ctrlSend(char *etherPort, uint8_t *inPayload, int payloadLen, int vlanID) {
 //printf("*** Interface: %s\n", *etherPort);
-printf("%s\n", 'String');
+printf("%d\n", 10);
 if (vlanID == 1)
 {
 	int frame_Size = -1;
