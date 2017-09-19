@@ -6,7 +6,7 @@
 #include "mtp_send.h"
 
 
-int ctrlSend(char *etherPort, uint8_t *inPayload, int payloadLen) {
+int ctrlSend(char *etherPort, uint8_t *inPayload, int payloadLen, int vlanID) {
 	int frame_Size = -1;
 
 	int sockfd;

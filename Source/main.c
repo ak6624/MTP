@@ -54,6 +54,10 @@ struct interface_tracker_t *interfaceTracker = NULL;
 int main (int argc, char** argv) {
 	char **interfaceNames;
 
+  //AK added variables used to store VLAN Interface and VLAN ID
+	char vlanInt[10];
+	int vlanID;
+
 	// Check number of Arguments.
 	if (argc < 2) {
 		printf("Error: Node spec or ROOT MTS ID missing. Format ./main <non MTS/root MTS> <ROOT MTS ID>\n");
@@ -116,7 +120,7 @@ int main (int argc, char** argv) {
 				payload = (uint8_t*) calloc (1, MAX_BUFFER_SIZE);
 				payloadLen = build_VID_ADVT_PAYLOAD(payload, interfaceNames[i]);
 				if (payloadLen) {
-					ctrlSend(interfaceNames[i], payload, payloadLen);
+					ctrlSend(interfaceNames[i], payload, payloadLen, vlanID);
 				}
 				free(payload);
 			}
@@ -193,7 +197,7 @@ void mtp_start() {
 			if (payloadLen) {
 				int i = 0;
 				for (; i < numberOfInterfaces; ++i) {
-					ctrlSend(interfaceNames[i], payload, payloadLen);
+					ctrlSend(interfaceNames[i], payload, payloadLen, vlanID);
 				}
 			}
 			free(payload);
@@ -213,7 +217,7 @@ void mtp_start() {
 
 					payloadLen = build_VID_CHANGE_PAYLOAD(payload, interfaceNames[i], deletedVIDs, numberOfDeletions);
 					if (payloadLen) {
-						ctrlSend(interfaceNames[i], payload, payloadLen);
+						ctrlSend(interfaceNames[i], payload, payloadLen, vlanID);
 					}
 					free(payload);
 				}
@@ -230,7 +234,7 @@ void mtp_start() {
 					payload = (uint8_t*) calloc (1, MAX_BUFFER_SIZE);
 					payloadLen = build_VID_ADVT_PAYLOAD(payload, c1->eth_name);
 					if (payloadLen) {
-						ctrlSend(c1->eth_name, payload, payloadLen);
+						ctrlSend(c1->eth_name, payload, payloadLen, vlanID);
 					}
 					free(payload);
 				}
@@ -282,7 +286,7 @@ void mtp_start() {
 						payloadLen = build_VID_ADVT_PAYLOAD(payload, recvOnEtherPort);
 
 						if (payloadLen) {
-							ctrlSend(recvOnEtherPort, payload, payloadLen);
+							ctrlSend(recvOnEtherPort, payload, payloadLen, vlanID);
 						}
 
 						free(payload);
@@ -309,7 +313,7 @@ void mtp_start() {
 								payload = (uint8_t*) calloc (1, MAX_BUFFER_SIZE);
 								payloadLen = build_JOIN_MSG_PAYLOAD(payload);
 								if (payloadLen) {
-									ctrlSend(recvOnEtherPort, payload, payloadLen);
+									ctrlSend(recvOnEtherPort, payload, payloadLen, vlanID);
 								}
 								free(payload);
 							}
@@ -420,7 +424,7 @@ void mtp_start() {
 									// recvOnEtherPort - Payload destination will be same from where Join message has orginated.
 									payloadLen = build_VID_ADVT_PAYLOAD(payload, interfaceNames[i]);
 									if (payloadLen) {
-										ctrlSend(interfaceNames[i], payload, payloadLen);
+										ctrlSend(interfaceNames[i], payload, payloadLen, vlanID);
 									}
 								}
 								free(payload);
@@ -467,7 +471,7 @@ void mtp_start() {
 
 									payloadLen = build_VID_CHANGE_PAYLOAD(payload, interfaceNames[i], deletedVIDs, numberOfDeletions);
 									if (payloadLen) {
-										ctrlSend(interfaceNames[i], payload, payloadLen);
+										ctrlSend(interfaceNames[i], payload, payloadLen, vlanID);
 									}
 									free(payload);
 								}
