@@ -482,7 +482,7 @@ void mtp_start() {
 								if (c1 != NULL) {
 									payloadLen = build_VID_ADVT_PAYLOAD(payload, c1->eth_name);
 									if (payloadLen) {
-										ctrlSend(c1->eth_name, payload, payloadLen);
+										ctrlSend(c1->eth_name, payload, payloadLen, vlanID);
 										//printf("Sending %s\n", c1->vid_addr);
 									}
 									free(payload);
