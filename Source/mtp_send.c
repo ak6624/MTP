@@ -17,6 +17,14 @@ int checkVlan;
 FILE * pFile; // File pointer
 pFile = fopen ("vlan.conf","r");
 printf("In ctrlSend 2\n");
+
+while(!feof(pFile))
+{
+	printf("In ctrlSend3\n");
+	
+}
+
+/*
 while (fscanf (pFile,"%s %d",intName,&intVlan) != EOF)
 {
 	printf("In ctrlSend3\n");
@@ -28,6 +36,8 @@ while (fscanf (pFile,"%s %d",intName,&intVlan) != EOF)
 	checkVlan = intVlan;
 	}
 }
+*/
+
 fclose (pFile);
 
 
