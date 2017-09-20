@@ -354,7 +354,8 @@ void print_entries_LL() {
   struct vid_addr_tuple *current;
   int tracker = MAX_MAIN_VID_TBL_PATHS;
 
-  printf("\n------------Main VID Table------------\n");
+  printf("\n--------------------------------------\n
+					\n------------Main VID Table------------\n");
   printf("MT_VID\t\t\t\tEthname\t\t\tPath Cost\tMembership\tMAC\n");
 
   for (current = main_vid_tbl_head; current != NULL; current = current->next) {
