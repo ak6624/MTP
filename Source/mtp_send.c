@@ -17,8 +17,7 @@ int checkVlan;
 FILE * pFile; // File pointer
 pFile = fopen ("vlan.conf","r");
 printf("In ctrlSend 2\n");
-//while (fscanf (pFile,"%s %d",intName,&intVlan) == 2)
-while (1)
+while (fscanf (pFile,"%s %d",intName,&intVlan) != EOF)
 {
 	printf("In ctrlSend3\n");
 	// AK - Find the interface in the config file and get its VLAN
@@ -29,7 +28,7 @@ while (1)
 	checkVlan = intVlan;
 	}
 }
-//fclose (pFile);
+fclose (pFile);
 
 
 // AK - Check interface VLAN
