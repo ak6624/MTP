@@ -18,7 +18,7 @@ FILE * pFile; // File pointer
 pFile = fopen ("vlan.conf","r");
 printf("In ctrlSend 2\n");
 
-//while(!feof(pFile))
+while(!feof(pFile))
 {
 	printf("In ctrlSend3\n");
 
@@ -38,7 +38,7 @@ while (fscanf (pFile,"%s %d",intName,&intVlan) != EOF)
 }
 */
 
-//fclose (pFile);
+fclose (pFile);
 printf("In ctrlSend4\n");
 
 // AK - Check interface VLAN
