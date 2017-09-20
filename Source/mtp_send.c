@@ -38,7 +38,7 @@ while (fscanf (pFile,"%s %d",intName,&intVlan) != EOF)
 }
 */
 
-fclose (pFile);
+//fclose (pFile);
 printf("In ctrlSend4\n");
 
 // AK - Check interface VLAN
