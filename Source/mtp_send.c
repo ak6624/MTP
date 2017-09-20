@@ -15,7 +15,7 @@ int intVlan; // Interface VLAN from file
 int checkVlan;
 printf("In ctrlSend 2\n");
 FILE * pFile; // File pointer
-pFile = fopen ("../vlan.conf","r");
+pFile = fopen ("vlan.conf","r");
 
 if (pFile == NULL) {
       printf("not open\n");
