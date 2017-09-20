@@ -16,17 +16,19 @@ int intVlan; // Interface VLAN from file
 int checkVlan;
 FILE * pFile; // File pointer
 pFile = fopen ("vlan.conf","r");
-
+printf("In ctrlSend 2\n");
 while (fscanf (pFile,"%s %d",intName,&intVlan) == 2)
 {
+	printf("In ctrlSend3\n");
 	// AK - Find the interface in the config file and get its VLAN
   if (!strcmp (intName,etherPort))
 	{
+	printf("In ctrlSend4\n");
   printf ("Interface: %s VLAN: %d \n",intName,intVlan);
 	checkVlan = intVlan;
 	}
 }
-//  fclose (pFile);
+fclose (pFile);
 
 
 // AK - Check interface VLAN
