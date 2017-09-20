@@ -14,10 +14,10 @@ char intName [10]; // Interface name from file
 int intVlan; // Interface VLAN from file
 int checkVlan;
 FILE * pFile; // File pointer
-pFile = fopen ("vlan.conf","r");
+pFile = fopen ("../vlan.conf","r");
 
 if (pFile == NULL) {
-      printf("File not open\n");
+      printf("ERROR: Unable to open vlan.conf\n");
       return -1 ;
 }
 
@@ -26,7 +26,7 @@ while (fscanf (pFile,"%s %d",intName,&intVlan) != EOF)
 	// AK - Find the interface in the config file and get its VLAN
   if (!strcmp (intName,etherPort))
 	{
-  printf ("Interface: %s VLAN: %d \n",intName,intVlan);
+  //printf ("Interface: %s VLAN: %d \n",intName,intVlan);
 	checkVlan = intVlan;
 	}
 }
@@ -36,7 +36,7 @@ fclose (pFile);
 // AK - Check interface VLAN
 if (vlanID == checkVlan)
 {
-	printf("Sending message\n");
+	//printf("Sending message\n");
 	int frame_Size = -1;
 	int sockfd;
 	struct ifreq if_idx;
