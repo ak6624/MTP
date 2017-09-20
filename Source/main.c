@@ -120,9 +120,7 @@ int main (int argc, char** argv) {
 				payload = (uint8_t*) calloc (1, MAX_BUFFER_SIZE);
 				payloadLen = build_VID_ADVT_PAYLOAD(payload, interfaceNames[i]);
 				if (payloadLen) {
-					printf("In 1st ctrlSend for loop\n");
 					ctrlSend(interfaceNames[i], payload, payloadLen, vlanID);
-					printf("End of 1st ctrlSend for loop\n");
 				}
 				free(payload);
 			}

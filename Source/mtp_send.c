@@ -8,29 +8,24 @@
 
 int ctrlSend(char *etherPort, uint8_t *inPayload, int payloadLen, int vlanID) {
 
-printf("In ctrlSend\n");
+//printf("In ctrlSend\n");
 // AK - Read VLAN config file
 char intName [10]; // Interface name from file
 int intVlan; // Interface VLAN from file
 int checkVlan;
-printf("In ctrlSend 2\n");
 FILE * pFile; // File pointer
 pFile = fopen ("vlan.conf","r");
 
 if (pFile == NULL) {
-      printf("not open\n");
+      printf("File not open\n");
       return -1 ;
 }
-else
-      printf("File open\n");
 
 while (fscanf (pFile,"%s %d",intName,&intVlan) != EOF)
 {
-	printf("In ctrlSend 3\n");
 	// AK - Find the interface in the config file and get its VLAN
   if (!strcmp (intName,etherPort))
 	{
-	printf("In ctrlSend 4\n");
   printf ("Interface: %s VLAN: %d \n",intName,intVlan);
 	checkVlan = intVlan;
 	}
