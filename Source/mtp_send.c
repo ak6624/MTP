@@ -22,7 +22,7 @@ while (fscanf (pFile,"%s %d",intName,&intVlan) == 2)
 	// AK - Find the interface in the config file and get its VLAN
   if (!strcmp (intName,etherPort))
 	{
-  printf ("Interface: %s VLAN: %d \n",str,d);
+  printf ("Interface: %s VLAN: %d \n",intName,intVlan);
 	checkVlan = intVlan;
 	}
 }
