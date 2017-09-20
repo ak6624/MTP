@@ -32,14 +32,12 @@ while (fscanf (pFile,"%s %d",intName,&intVlan) != EOF)
 }
 
 fclose (pFile);
-printf("In ctrlSend4\n");
 
 // AK - Check interface VLAN
-if (vlanID == 1)
+if (vlanID == checkVlan)
 {
-	printf("In ctrlSend5\n");
+	printf("Sending message\n");
 	int frame_Size = -1;
-
 	int sockfd;
 	struct ifreq if_idx;
 	struct ifreq if_mac;
