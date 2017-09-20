@@ -19,6 +19,14 @@ printf("In ctrlSend 2\n");
 FILE * pFile; // File pointer
 pFile = fopen ("vlan.conf","r");
 
+if (pFile == NULL) {
+      printf("not open\n");
+      return -1 ;
+}
+else
+      printf("File open\n");
+
+
 while(!feof(pFile))
 {
 	printf("In ctrlSend3\n");
