@@ -7,9 +7,30 @@
 
 
 int ctrlSend(char *etherPort, uint8_t *inPayload, int payloadLen, int vlanID) {
-printf("*** Interface: %s\n", etherPort);
+//printf("*** Interface: %s\n", etherPort);
 //printf("%d\n", 10);
-if (vlanID == 1)
+
+// AK - Read VLAN config file
+char intName [10]; // Interface name from file
+int intVlan; // Interface VLAN from file
+int checkVlan;
+FILE * pFile; // File pointer
+pFile = fopen ("vlan.conf","r");
+
+while (fscanf (pFile,"%s %d",intName,&intVlan) == 2)
+{
+	// AK - Find the interface in the config file and get its VLAN
+  if (!strcmp (intName,etherPort))
+	{
+  printf ("Interface: %s VLAN: %d \n",str,d);
+	checkVlan = intVlan;
+	}
+}
+  fclose (pFile);
+
+
+// AK - Check interface VLAN
+if (vlanID == checkVlan)
 {
 	int frame_Size = -1;
 
