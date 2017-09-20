@@ -21,7 +21,7 @@ printf("In ctrlSend 2\n");
 while(!feof(pFile))
 {
 	printf("In ctrlSend3\n");
-	
+
 }
 
 /*
@@ -38,7 +38,7 @@ while (fscanf (pFile,"%s %d",intName,&intVlan) != EOF)
 }
 */
 
-fclose (pFile);
+//fclose (pFile);
 
 
 // AK - Check interface VLAN
