@@ -52,7 +52,7 @@ struct interface_tracker_t *interfaceTracker = NULL;
 
 //AK added variables used to store VLAN Interface and VLAN ID
 char vlanInt[10];
-int vlanID;
+int vlanID = 1;
 
 /* Entry point to the program */
 int main (int argc, char** argv) {
