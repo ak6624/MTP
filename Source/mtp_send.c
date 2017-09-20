@@ -9,7 +9,7 @@
 int ctrlSend(char *etherPort, uint8_t *inPayload, int payloadLen, int vlanID) {
 //printf("*** Interface: %s\n", etherPort);
 //printf("%d\n", 10);
-
+printf("In ctrlSend");
 // AK - Read VLAN config file
 char intName [10]; // Interface name from file
 int intVlan; // Interface VLAN from file
