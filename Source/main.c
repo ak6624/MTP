@@ -122,6 +122,7 @@ int main (int argc, char** argv) {
 				if (payloadLen) {
 					printf("In 1st ctrlSend for loop\n");
 					ctrlSend(interfaceNames[i], payload, payloadLen, vlanID);
+					printf("End of 1st ctrlSend for loop\n");
 				}
 				free(payload);
 			}
