@@ -530,7 +530,7 @@ void mtp_start() {
 			// Check if the data frame is a broadcast.
 			if (strncmp(ether_ntoa((struct ether_addr *)&eheader->ether_dhost), "ff:ff:ff:ff:ff:ff", 17) == 0) {
 				// if the frame is a broadcast frame.
-				printf("Received broadcast frame\n");
+				//printf("Received broadcast frame\n");
 
 				// Send it to all host ports, first.
 				struct local_bcast_tuple* current =  getInstance_lbcast_LL();
@@ -539,7 +539,7 @@ void mtp_start() {
 					// port should not be the same from where it received frame.
 					if (strcmp(current->eth_name, recvOnEtherPort) != 0) {
 						dataSend(current->eth_name, recvBuffer, recv_len, vlanID);
-						printf("Sent to host %s\n", current->eth_name);
+						//printf("Sent to host %s\n", current->eth_name);
 					}
 				}
 
