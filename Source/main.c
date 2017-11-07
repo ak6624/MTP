@@ -536,7 +536,7 @@ void mtp_start() {
 				for (; current != NULL; current = current->next) {
 					// port should not be the same from where it received frame.
 					if (strcmp(current->eth_name, recvOnEtherPort) != 0) {
-						dataSend(current->eth_name, recvBuffer, recv_len);
+						dataSend(current->eth_name, recvBuffer, recv_len, vlanID);
 						printf("Sent to host %s\n", current->eth_name);
 					}
 				}
@@ -547,7 +547,7 @@ void mtp_start() {
 				for (; cpt != NULL; cpt = cpt->next) {
 					// port should not be the same from where it received frame.
 					if (strcmp(cpt->child_port, recvOnEtherPort) != 0) {
-						dataSend(cpt->child_port, recvBuffer, recv_len);
+						dataSend(cpt->child_port, recvBuffer, recv_len, vlanID);
 						printf("Sent to child %s\n", cpt->child_port);
 					}
 				}
@@ -556,7 +556,7 @@ void mtp_start() {
 				if (!isRoot) {
 					struct vid_addr_tuple* vid_t = getInstance_vid_tbl_LL();
 					if (strcmp(vid_t->eth_name, recvOnEtherPort) != 0) {
-						dataSend(vid_t->eth_name, recvBuffer, recv_len);
+						dataSend(vid_t->eth_name, recvBuffer, recv_len, vlan);
 						printf("Sent to PVID%s\n", vid_t->eth_name);
 					}
 				}
