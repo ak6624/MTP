@@ -556,7 +556,7 @@ void mtp_start() {
 				if (!isRoot) {
 					struct vid_addr_tuple* vid_t = getInstance_vid_tbl_LL();
 					if (strcmp(vid_t->eth_name, recvOnEtherPort) != 0) {
-						dataSend(vid_t->eth_name, recvBuffer, recv_len, vlan);
+						dataSend(vid_t->eth_name, recvBuffer, recv_len, vlanID);
 						printf("Sent to PVID%s\n", vid_t->eth_name);
 					}
 				}
