@@ -550,7 +550,7 @@ void mtp_start() {
 					// port should not be the same from where it received frame.
 					if (strcmp(cpt->child_port, recvOnEtherPort) != 0) {
 						dataSend(cpt->child_port, recvBuffer, recv_len, vlanID);
-						printf("Sent to child %s\n", cpt->child_port);
+						//printf("Sent to child %s\n", cpt->child_port);
 					}
 				}
 /*
