@@ -141,7 +141,7 @@ int main (int argc, char** argv) {
 	return 0;
 }
 
-/* Start MTP Protocol. */
+////// START MTP Protocol //////
 void mtp_start() {
 	int sockCtrl = 0, sockData = 0, recv_len = 0;
 	uint8_t recvBuffer[MAX_BUFFER_SIZE];
@@ -255,6 +255,7 @@ void mtp_start() {
 
 		socklen_t addr_len = sizeof(src_addr);
 
+///// RECEIVE CTRL /////
 		recv_len = recvfrom(sockCtrl, recvBuffer, MAX_BUFFER_SIZE, MSG_DONTWAIT, (struct sockaddr*) &src_addr, &addr_len);
 		if (recv_len > 0) {
 			char recvOnEtherPort[5];
@@ -505,7 +506,7 @@ void mtp_start() {
 			}
 		}
 
-		/* Receive data traffic */
+///// RECEIVE DATA /////
 		recv_len = recvfrom(sockData, recvBuffer, MAX_BUFFER_SIZE, MSG_DONTWAIT, (struct sockaddr*) &src_addr, &addr_len);
 		if (recv_len > 0) {
 			char recvOnEtherPort[5];
