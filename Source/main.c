@@ -5,7 +5,7 @@
  *  Created on: Sep 21, 2015
  *  Author: Pranav Sai(pk6420@rit.edu)
  *  Updated by: Ankush Kaul (ak6624@rit.edu)
- *  Version: develop3
+ *  Version: develop3.1
  */
 
 #include <stdio.h>
@@ -553,7 +553,7 @@ void mtp_start() {
 						printf("Sent to child %s\n", cpt->child_port);
 					}
 				}
-
+/*
 				// Next Send it port from where current PVID is acquired, if it is not same as the received port.
 				if (!isRoot) {
 					struct vid_addr_tuple* vid_t = getInstance_vid_tbl_LL();
@@ -563,6 +563,7 @@ void mtp_start() {
 					}
 				}
 				//print_entries_cpvid_LL();
+*/
 			}
 
 		}
