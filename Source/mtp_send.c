@@ -12,7 +12,7 @@ int ctrlSend(char *etherPort, uint8_t *inPayload, int payloadLen, int vlanID) {
 // AK - Read VLAN config file
 char intName [10]; // Interface name from file
 int intVlan; // Interface VLAN from file
-int checkVlan;
+int checkVlan = 1;
 FILE * pFile; // File pointer
 pFile = fopen ("./vlan.conf","r");
 
