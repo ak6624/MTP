@@ -515,6 +515,7 @@ void mtp_start() {
 			char ctrlInterface[] = "eth0";
 
 			// ignore frames that are from the control interface.
+			printf("%s %s\n",recvOnEtherPort,ctrlInterface);
 			if ((strcmp(recvOnEtherPort, ctrlInterface)) == 0) {
 				continue;
 			}
@@ -553,7 +554,7 @@ void mtp_start() {
 						//printf("Sent to child %s\n", cpt->child_port);
 					}
 				}
-/*
+
 				// Next Send it port from where current PVID is acquired, if it is not same as the received port.
 				if (!isRoot) {
 					struct vid_addr_tuple* vid_t = getInstance_vid_tbl_LL();
@@ -563,7 +564,7 @@ void mtp_start() {
 					}
 				}
 				//print_entries_cpvid_LL();
-*/
+
 			}
 
 		}
