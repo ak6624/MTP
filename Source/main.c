@@ -508,7 +508,7 @@ void mtp_start() {
 
 ///// RECEIVE DATA /////
 		recv_len = recvfrom(sockData, recvBuffer, MAX_BUFFER_SIZE, MSG_DONTWAIT, (struct sockaddr*) &src_addr, &addr_len);
-		printf("Receive 0\n");
+		//printf("Receive 0\n");
 		if (recv_len > 0) {
 			printf("Receive 1\n");
 			char recvOnEtherPort[5];
