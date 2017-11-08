@@ -34,6 +34,7 @@
 #include "mtp_send.h"
 
 #define ETH_MTP_CTRL    0x8850
+#define ETH_MTP_DATA		0xff00
 #define MAX_VID_LIST    20
 #define CTRL_IP		"172"
 
@@ -164,7 +165,7 @@ void mtp_start() {
 	}
 
 	// Create Socket, ETH_P_ARP/ETH_P_ALL is used because we are listening packets of all kinds.
-	if ((sockData = socket(AF_PACKET, SOCK_RAW, htons (ETH_P_ARP))) < 0) {
+	if ((sockData = socket(AF_PACKET, SOCK_RAW, htons (ETH_MTP_DATA))) < 0) {
 		perror("Error: MTP socket()");
 		exit(1);
 	}
