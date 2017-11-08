@@ -217,7 +217,7 @@ void main() {
 
 
         //sleep(1);
-        delay(10000);
+        delay(1000);
         // Send packet (Decapsulation)
         if (sendto(sockfd, frame, tx_len + payLoad_Size, 0,
                    (struct sockaddr*) &socket_address, sizeof(struct sockaddr_ll)) < 0) //send a message on a socket
