@@ -164,7 +164,7 @@ void mtp_start() {
 	}
 
 	// Create Socket, ETH_P_ARP/ETH_P_ALL is used because we are listening packets of all kinds.
-	if ((sockData = socket(AF_PACKET, SOCK_RAW, htons (ETH_P_ARP))) < 0) {
+	if ((sockData = socket(AF_PACKET, SOCK_RAW, htons (ETH_P_ALL))) < 0) {
 		perror("Error: MTP socket()");
 		exit(1);
 	}
