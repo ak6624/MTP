@@ -5,7 +5,7 @@
  *  Created on: Sep 21, 2015
  *  Author: Pranav Sai(pk6420@rit.edu)
  *  Updated by: Ankush Kaul (ak6624@rit.edu)
- *  Version: develop3.1
+ *  Version: develop3.2
  */
 
 #include <stdio.h>
@@ -544,7 +544,7 @@ void mtp_start() {
 					// port should not be the same from where it received frame.
 					if (strcmp(current->eth_name, recvOnEtherPort) != 0) {
 						dataSend(current->eth_name, recvBuffer, recv_len, vlanID);
-						printf("Sent to host %s\n", current->eth_name);
+						//printf("Sent to host %s\n", current->eth_name);
 					}
 				}
 
@@ -555,7 +555,7 @@ void mtp_start() {
 					// port should not be the same from where it received frame.
 					if (strcmp(cpt->child_port, recvOnEtherPort) != 0) {
 						dataSend(cpt->child_port, recvBuffer, recv_len, vlanID);
-						printf("Sent to child %s\n", cpt->child_port);
+						//printf("Sent to child %s\n", cpt->child_port);
 					}
 				}
 
@@ -564,7 +564,7 @@ void mtp_start() {
 					struct vid_addr_tuple* vid_t = getInstance_vid_tbl_LL();
 					if (strcmp(vid_t->eth_name, recvOnEtherPort) != 0) {
 						dataSend(vid_t->eth_name, recvBuffer, recv_len, vlanID);
-						printf("Sent to PVID%s\n", vid_t->eth_name);
+						//printf("Sent to PVID%s\n", vid_t->eth_name);
 					}
 				}
 				//print_entries_cpvid_LL();
