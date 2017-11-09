@@ -181,6 +181,8 @@ if (vlanID == checkVlan)
     printf("ERROR: Send failed\n");
   }
 
+  printf("Sent to int %s\n", current->eth_name);
+
   close(sockfd);
   return 0;
 }
