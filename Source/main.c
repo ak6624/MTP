@@ -511,14 +511,14 @@ void mtp_start() {
 		recv_len = recvfrom(sockData, recvBuffer, MAX_BUFFER_SIZE, MSG_DONTWAIT, (struct sockaddr*) &src_addr, &addr_len);
 		//printf("Receive 0\n");
 		if (recv_len > 0) {
-			printf("Receive 1\n");
+			//printf("Receive 1\n");
 			char recvOnEtherPort[5];
 
 			if_indextoname(src_addr.sll_ifindex, recvOnEtherPort);
 			char ctrlInterface[] = "eth0";
 
 			// ignore frames that are from the control interface.
-			printf("%s %s\n",recvOnEtherPort,ctrlInterface);
+			//printf("%s %s\n",recvOnEtherPort,ctrlInterface);
 			if ((strcmp(recvOnEtherPort, ctrlInterface)) == 0) {
 				continue;
 			}
