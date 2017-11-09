@@ -525,11 +525,12 @@ void mtp_start() {
 
 			// read ethernet header
 			eheader = (struct ether_header*)recvBuffer;
-
+			/*
 			// read ethernet header
 			printf("Source MAC: %s\n", ether_ntoa((struct ether_addr *) &eheader->ether_shost));
 			  printf("Destination MAC: %s\n", ether_ntoa((struct ether_addr *)&eheader->ether_dhost));
 			  printf("Message Type: %x\n", ntohs(eheader->ether_type));
+			*/
 
 			// Check if the data frame is a broadcast.
 			if (strncmp(ether_ntoa((struct ether_addr *)&eheader->ether_dhost), "ff:ff:ff:ff:ff:ff", 17) == 0) {
