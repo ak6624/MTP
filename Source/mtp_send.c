@@ -134,7 +134,7 @@ char intName [10]; // Interface name from file
 int intVlan; // Interface VLAN from file
 int checkVlan = 1;
 FILE * pFile; // File pointer
-pFile = fopen ("../vlan.conf","r");
+pFile = fopen ("./vlan.conf","r");
 
 if (pFile == NULL) {
       //perror("ERROR: Unable to open vlan.conf\n");
