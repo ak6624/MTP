@@ -15,7 +15,7 @@
 // Allocating size to different containers
 #define HEADER_SIZE		14
 
-#define host2
+#define bcast
 #define NO_OF_FRAMES 1000
 
 #ifdef host0
@@ -43,6 +43,15 @@
 #define MY_DEST_MAC3    0xb2
 #define MY_DEST_MAC4    0x7c
 #define MY_DEST_MAC5    0x1e
+#endif
+
+#ifdef bcast
+#define MY_DEST_MAC0    0xff
+#define MY_DEST_MAC1    0xff
+#define MY_DEST_MAC2    0xff
+#define MY_DEST_MAC3    0xff
+#define MY_DEST_MAC4    0xff
+#define MY_DEST_MAC5    0xff
 #endif
 
 
