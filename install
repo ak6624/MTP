@@ -4,3 +4,5 @@ rm -rf bin
 mkdir bin
 gcc Source/*.c -o bin/mtpd
 gcc Bcast/bcast.c -o bin/bcast
+gcc unicast/unicastframe_recv.c -o bin/unicastframe_recv -lm
+gcc unicast/unicastframe_gen.c -o bin/unicastframe_gen -lm

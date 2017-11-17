@@ -12,26 +12,24 @@ int ctrlSend(char *etherPort, uint8_t *inPayload, int payloadLen, int vlanID) {
 // AK - Read VLAN config file
 char intName [10]; // Interface name from file
 int intVlan; // Interface VLAN from file
-int checkVlan;
+int checkVlan = 1;
 FILE * pFile; // File pointer
-pFile = fopen ("../vlan.conf","r");
+pFile = fopen ("./vlan.conf","r");
 
 if (pFile == NULL) {
-      printf("ERROR: Unable to open vlan.conf\n");
-      return -1 ;
+      //perror("ERROR: Unable to open vlan.conf\n");
+      //return -1 ;
+} else {
+  while (fscanf (pFile,"%s %d",intName,&intVlan) != EOF) {
+  	// AK - Find the interface in the config file and get its VLAN
+    if (!strcmp (intName,etherPort))
+  	{
+    //printf ("Interface: %s VLAN: %d \n",intName,intVlan);
+  	checkVlan = intVlan;
+  	}
+  }
+  fclose (pFile);
 }
-
-while (fscanf (pFile,"%s %d",intName,&intVlan) != EOF)
-{
-	// AK - Find the interface in the config file and get its VLAN
-  if (!strcmp (intName,etherPort))
-	{
-  //printf ("Interface: %s VLAN: %d \n",intName,intVlan);
-	checkVlan = intVlan;
-	}
-}
-
-fclose (pFile);
 
 // AK - Check interface VLAN
 if (vlanID == checkVlan)
@@ -129,7 +127,33 @@ else
 }
 
 
-int dataSend(char *etherPort, uint8_t *inPayload, int payloadLen) {
+int dataSend(char *etherPort, uint8_t *inPayload, int payloadLen, int vlanID) {
+
+// AK - Read VLAN config file
+char intName [10]; // Interface name from file
+int intVlan; // Interface VLAN from file
+int checkVlan = 1;
+FILE * pFile; // File pointer
+pFile = fopen ("./vlan.conf","r");
+
+if (pFile == NULL) {
+      //perror("ERROR: Unable to open vlan.conf\n");
+      //return -1 ;
+} else {
+  while (fscanf (pFile,"%s %d",intName,&intVlan) != EOF) {
+  	// AK - Find the interface in the config file and get its VLAN
+    if (!strcmp (intName,etherPort))
+  	{
+    //printf ("Interface: %s VLAN: %d \n",intName,intVlan);
+  	checkVlan = intVlan;
+  	}
+  }
+  fclose (pFile);
+}
+
+// AK - Check interface VLAN
+if (vlanID == checkVlan)
+{
   int sockfd;
   struct ifreq if_idx;
 
@@ -157,6 +181,11 @@ int dataSend(char *etherPort, uint8_t *inPayload, int payloadLen) {
     printf("ERROR: Send failed\n");
   }
 
+  printf("Sent to int %s\n", etherPort);
+
   close(sockfd);
+  return 0;
+}
+else
   return 0;
 }

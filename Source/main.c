@@ -5,6 +5,7 @@
  *  Created on: Sep 21, 2015
  *  Author: Pranav Sai(pk6420@rit.edu)
  *  Updated by: Ankush Kaul (ak6624@rit.edu)
+ *  Version: develop3.2
  */
 
 #include <stdio.h>
@@ -33,6 +34,7 @@
 #include "mtp_send.h"
 
 #define ETH_MTP_CTRL    0x8850
+#define ETH_MTP_DATA		0xff00
 #define MAX_VID_LIST    20
 #define CTRL_IP		"172"
 
@@ -140,7 +142,7 @@ int main (int argc, char** argv) {
 	return 0;
 }
 
-/* Start MTP Protocol. */
+////// START MTP Protocol //////
 void mtp_start() {
 	int sockCtrl = 0, sockData = 0, recv_len = 0;
 	uint8_t recvBuffer[MAX_BUFFER_SIZE];
@@ -162,8 +164,8 @@ void mtp_start() {
 		exit(1);
 	}
 
-	// Create Socket, ETH_ is used because we are listening packets of all kinds.
-	if ((sockData = socket(AF_PACKET, SOCK_RAW, htons (ETH_P_ARP))) < 0) {
+	// Create Socket, ETH_P_ARP/ETH_P_ALL is used because we are listening packets of all kinds.
+	if ((sockData = socket(AF_PACKET, SOCK_RAW, htons (ETH_MTP_DATA))) < 0) {
 		perror("Error: MTP socket()");
 		exit(1);
 	}
@@ -254,6 +256,7 @@ void mtp_start() {
 
 		socklen_t addr_len = sizeof(src_addr);
 
+///// RECEIVE CTRL /////
 		recv_len = recvfrom(sockCtrl, recvBuffer, MAX_BUFFER_SIZE, MSG_DONTWAIT, (struct sockaddr*) &src_addr, &addr_len);
 		if (recv_len > 0) {
 			char recvOnEtherPort[5];
@@ -504,31 +507,35 @@ void mtp_start() {
 			}
 		}
 
-		/* Receive data traffic */
+///// RECEIVE DATA /////
 		recv_len = recvfrom(sockData, recvBuffer, MAX_BUFFER_SIZE, MSG_DONTWAIT, (struct sockaddr*) &src_addr, &addr_len);
+		//printf("Receive 0\n");
 		if (recv_len > 0) {
+			//printf("Receive 1\n");
 			char recvOnEtherPort[5];
 
 			if_indextoname(src_addr.sll_ifindex, recvOnEtherPort);
 			char ctrlInterface[] = "eth0";
 
 			// ignore frames that are from the control interface.
+			//printf("%s %s\n",recvOnEtherPort,ctrlInterface);
 			if ((strcmp(recvOnEtherPort, ctrlInterface)) == 0) {
 				continue;
 			}
 
 			// read ethernet header
 			eheader = (struct ether_header*)recvBuffer;
-
+			/*
 			// read ethernet header
-			/*printf("Source MAC: %s\n", ether_ntoa((struct ether_addr *) &eheader->ether_shost));
+			printf("Source MAC: %s\n", ether_ntoa((struct ether_addr *) &eheader->ether_shost));
 			  printf("Destination MAC: %s\n", ether_ntoa((struct ether_addr *)&eheader->ether_dhost));
-			  printf("Message Type: %x\n", ntohs(eheader->ether_type));*/
+			  printf("Message Type: %x\n", ntohs(eheader->ether_type));
+			*/
 
 			// Check if the data frame is a broadcast.
 			if (strncmp(ether_ntoa((struct ether_addr *)&eheader->ether_dhost), "ff:ff:ff:ff:ff:ff", 17) == 0) {
 				// if the frame is a broadcast frame.
-				printf("Received broadcast frame\n");
+				//printf("Received broadcast frame\n");
 
 				// Send it to all host ports, first.
 				struct local_bcast_tuple* current =  getInstance_lbcast_LL();
@@ -536,8 +543,8 @@ void mtp_start() {
 				for (; current != NULL; current = current->next) {
 					// port should not be the same from where it received frame.
 					if (strcmp(current->eth_name, recvOnEtherPort) != 0) {
-						dataSend(current->eth_name, recvBuffer, recv_len);
-						printf("Sent to host %s\n", current->eth_name);
+						dataSend(current->eth_name, recvBuffer, recv_len, vlanID);
+						//printf("Sent to host %s\n", current->eth_name);
 					}
 				}
 
@@ -547,8 +554,8 @@ void mtp_start() {
 				for (; cpt != NULL; cpt = cpt->next) {
 					// port should not be the same from where it received frame.
 					if (strcmp(cpt->child_port, recvOnEtherPort) != 0) {
-						dataSend(cpt->child_port, recvBuffer, recv_len);
-						printf("Sent to child %s\n", cpt->child_port);
+						dataSend(cpt->child_port, recvBuffer, recv_len, vlanID);
+						//printf("Sent to child %s\n", cpt->child_port);
 					}
 				}
 
@@ -556,11 +563,12 @@ void mtp_start() {
 				if (!isRoot) {
 					struct vid_addr_tuple* vid_t = getInstance_vid_tbl_LL();
 					if (strcmp(vid_t->eth_name, recvOnEtherPort) != 0) {
-						dataSend(vid_t->eth_name, recvBuffer, recv_len);
-						printf("Sent to PVID%s\n", vid_t->eth_name);
+						dataSend(vid_t->eth_name, recvBuffer, recv_len, vlanID);
+						//printf("Sent to PVID%s\n", vid_t->eth_name);
 					}
 				}
 				//print_entries_cpvid_LL();
+
 			}
 
 		}
