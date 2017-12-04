@@ -60,7 +60,7 @@ if (pFile == NULL) {
 }
 
 checkVlan = getVlan(etherPort, vlanID);
-printf ("CheckVLAN: %d Interface: %d \n",checkVlan,etherPort);
+printf ("CheckVLAN: %d Interface: %s \n",checkVlan,etherPort);
 
 // AK - Check interface VLAN
 if (vlanID == checkVlan)
