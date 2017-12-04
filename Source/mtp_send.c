@@ -6,6 +6,34 @@
 #include "mtp_send.h"
 
 
+int getVlan(char *etherPort, int vlanID) {
+
+//printf("In ctrlSend\n");
+// AK - Read VLAN config file
+char intName [10]; // Interface name from file
+int intVlan; // Interface VLAN from file
+int checkVlan = 1;
+FILE * pFile; // File pointer
+pFile = fopen ("./vlan.conf","r");
+
+if (pFile == NULL) {
+      //perror("ERROR: Unable to open vlan.conf\n");
+      //return -1 ;
+} else {
+    while (fscanf (pFile,"%s %d",intName,&intVlan) != EOF) {
+    	// AK - Find the interface in the config file and get its VLAN
+      if (!strcmp (intName,etherPort))
+    	{
+      //printf ("Interface: %s VLAN: %d \n",intName,intVlan);
+    	checkVlan = intVlan;
+    	}
+    }
+  fclose (pFile);
+  }
+  return checkVlan;
+}
+
+
 int ctrlSend(char *etherPort, uint8_t *inPayload, int payloadLen, int vlanID) {
 
 //printf("In ctrlSend\n");
@@ -30,6 +58,9 @@ if (pFile == NULL) {
   }
   fclose (pFile);
 }
+
+checkVlan = getVlan(etherPort, vlanID);
+printf ("CheckVLAN: %d Interface: %d \n",checkVlan,etherPort);
 
 // AK - Check interface VLAN
 if (vlanID == checkVlan)
