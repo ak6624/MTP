@@ -60,7 +60,7 @@ int ctrlSend(char *etherPort, uint8_t *inPayload, int payloadLen, int vlanID) {
             fclose (pFile);
           }
           */
-checkVlan = getVlan(etherPort, vlanID);
+int checkVlan = getVlan(etherPort, vlanID);
 //printf ("CheckVLAN: %d Interface: %s \n",checkVlan,etherPort);
 
 // AK - Check interface VLAN
