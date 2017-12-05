@@ -5,7 +5,7 @@
 
 #include "mtp_send.h"
 
-
+//Function to get VLAN ID from config file
 int getVlan(char *etherPort, int vlanID) {
 
 //printf("In ctrlSend\n");
@@ -161,27 +161,31 @@ else
 
 int dataSend(char *etherPort, uint8_t *inPayload, int payloadLen, int vlanID) {
 
-// AK - Read VLAN config file
-char intName [10]; // Interface name from file
-int intVlan; // Interface VLAN from file
-int checkVlan = 1;
-FILE * pFile; // File pointer
-pFile = fopen ("./vlan.conf","r");
+      /*
+      // AK - Read VLAN config file
+      char intName [10]; // Interface name from file
+      int intVlan; // Interface VLAN from file
+      int checkVlan = 1;
+      FILE * pFile; // File pointer
+      pFile = fopen ("./vlan.conf","r");
 
-if (pFile == NULL) {
-      //perror("ERROR: Unable to open vlan.conf\n");
-      //return -1 ;
-} else {
-  while (fscanf (pFile,"%s %d",intName,&intVlan) != EOF) {
-  	// AK - Find the interface in the config file and get its VLAN
-    if (!strcmp (intName,etherPort))
-  	{
-    //printf ("Interface: %s VLAN: %d \n",intName,intVlan);
-  	checkVlan = intVlan;
-  	}
-  }
-  fclose (pFile);
-}
+      if (pFile == NULL) {
+            //perror("ERROR: Unable to open vlan.conf\n");
+            //return -1 ;
+      } else {
+        while (fscanf (pFile,"%s %d",intName,&intVlan) != EOF) {
+        	// AK - Find the interface in the config file and get its VLAN
+          if (!strcmp (intName,etherPort))
+        	{
+          //printf ("Interface: %s VLAN: %d \n",intName,intVlan);
+        	checkVlan = intVlan;
+        	}
+        }
+        fclose (pFile);
+      }
+      */
+
+int checkVlan = getVlan(etherPort, vlanID);
 
 // AK - Check interface VLAN
 if (vlanID == checkVlan)

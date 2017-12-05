@@ -29,6 +29,7 @@
 #define HEADER_SIZE		14
 
 /* Function Prototypes */
+int getVlan(char *, int);
 int ctrlSend(char *, uint8_t *, int, int);
 int dataSend(char *, uint8_t *, int, int);
 
