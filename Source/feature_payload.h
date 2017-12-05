@@ -35,7 +35,7 @@
 #define VID_ADD			            1
 #define VID_DEL			            2
 
-#define PVID_PORT 		          1 
+#define PVID_PORT 		          1
 #define NON_PVID_PORT		        2
 
 #define PATH_COST		            0
@@ -45,6 +45,13 @@
 /* Type of Ports */
 #define MTP_PORT                1
 #define HOST_PORT               2
+
+/* Container for VLAN Table */
+struct vlan_tuple {
+	int vlanID
+	struct vid_addr_tuple;
+	struct vlan_tuple *next;
+};
 
 /* Container for VID Table */
 struct vid_addr_tuple {
