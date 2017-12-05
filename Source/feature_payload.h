@@ -46,13 +46,6 @@
 #define MTP_PORT                1
 #define HOST_PORT               2
 
-/* Container for VLAN Table */
-struct vlan_tuple {
-	int vlanID;
-	struct vid_addr_tuple vid_addr;
-	struct vlan_tuple *next;
-};
-
 /* Container for VID Table */
 struct vid_addr_tuple {
 	char eth_name[ETH_ADDR_LEN]; 	// Port of Acquisition
@@ -90,6 +83,13 @@ struct child_pvid_tuple {
 struct local_bcast_tuple {
   char eth_name[ETH_ADDR_LEN];          // Host port Name
   struct local_bcast_tuple *next;
+};
+
+/* Container for VLAN Table */
+struct vlan_tuple {
+	int vlanID;
+	struct vid_addr_tuple vid;
+	struct vlan_tuple *next;
 };
 
 /* Function Prototypes for payloads */
