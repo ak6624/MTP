@@ -15,6 +15,7 @@
 #include <sys/socket.h>
 #include <net/if.h>
 #include <netinet/ether.h>
+#include <unistd.h>
 
 // Destination MAC address (Presently broadcast address)
 #define MY_DEST_MAC0	0xFF
