@@ -48,7 +48,7 @@
 
 /* Container for VLAN Table */
 struct vlan_tuple {
-	int vlanID
+	int vlanID;
 	struct vid_addr_tuple;
 	struct vlan_tuple *next;
 };
