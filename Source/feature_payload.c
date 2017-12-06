@@ -2,7 +2,7 @@
 #include "mtp_send.h"
 
 /* file locals */
-struct vlan_tuple *vlan_head = NULL;
+struct vlan_tuple *vlan_tbl_head = NULL;
 struct vid_addr_tuple *main_vid_tbl_head = NULL;
 //struct vid_addr_tuple *bkp_vid_tbl_head = NULL; // we can maintain backup paths in Main VID Table only, just a thought
 struct child_pvid_tuple *cpvid_tbl_head = NULL;
@@ -21,7 +21,6 @@ struct local_bcast_tuple *local_bcast_head = NULL;
  *  -1  - if VID is not child of any of the VID's in the main VID Table.
  *
  */
-
 int isChild(char *vid) {
 
 	// For now just checking only the Main VID table.

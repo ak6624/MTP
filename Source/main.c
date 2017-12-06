@@ -56,6 +56,7 @@ struct interface_tracker_t *interfaceTracker = NULL;
 //AK added variables used to store VLAN Interface and VLAN ID
 char vlanInt[10];
 int vlanID = 1;
+int vlanCount = 2;
 
 /* Entry point to the program */
 int main (int argc, char** argv) {
@@ -94,39 +95,46 @@ int main (int argc, char** argv) {
 	}
 
 
-	// If Node is Root MTS
+////// If Node is Root MTS //////
 	if (isRoot) {
 		// Check if Root VID is provided through CLI.
 		if (argv[2] != NULL) {
 			printf ("ROOT MTVID: %s\n", argv[2]);
 
-			// Allocate memory and intialize(calloc).
-			struct vid_addr_tuple *new_node = (struct vid_addr_tuple*) calloc (1, sizeof(struct vid_addr_tuple));
+			for (int vlanID=1; vlanID<=vlanCount; i++) {
 
-			// Fill data.
-			strncpy(new_node->vid_addr, argv[2], strlen(argv[2]));
-			strcpy(new_node->eth_name, "self");   	// own interface, so mark it as self, will be helpful while tracking own VIDs.
-			new_node->last_updated = -1; 		        // -1 here because root ID should not be removed.
-			new_node->port_status = PVID_PORT;
-			new_node->next = NULL;
-			new_node->isNew = true;
-			new_node->path_cost = PATH_COST;
+						//Allocate memory for vlan_tuple
+						struct vlan_tuple *new_node = (struct vlan_tuple*) calloc (1, sizeof(struct vlan_tuple));
 
-			// Add into VID Table.
-			add_entry_LL(new_node);
+						// Allocate memory and intialize(calloc).
+						//struct vid_addr_tuple *new_node = (struct vid_addr_tuple*) calloc (1, sizeof(struct vid_addr_tuple));
 
-			i = 0;
-			uint8_t *payload = NULL;
-			uint8_t payloadLen;
+						// Fill data.
+						strncpy(new_node->vid->vid_addr, argv[2], strlen(argv[2]));
+						strcpy(new_node->vid->eth_name, "self");   	// own interface, so mark it as self, will be helpful while tracking own VIDs.
+						new_node->vid->last_updated = -1; 		        // -1 here because root ID should not be removed.
+						new_node->vid->port_status = PVID_PORT;
+						new_node->vid->next = NULL;
+						new_node->vid->isNew = true;
+						new_node->vid->path_cost = PATH_COST;
 
-			for (; i < numberOfInterfaces; i++) {
-				payload = (uint8_t*) calloc (1, MAX_BUFFER_SIZE);
-				payloadLen = build_VID_ADVT_PAYLOAD(payload, interfaceNames[i]);
-				if (payloadLen) {
-					ctrlSend(interfaceNames[i], payload, payloadLen, vlanID);
-				}
-				free(payload);
-			}
+						// Add into VID Table.
+						if (vlanID==argv[2])
+								add_entry_LL(new_node->vid);
+
+						i = 0;
+						uint8_t *payload = NULL;
+						uint8_t payloadLen;
+
+						for (; i < numberOfInterfaces; i++) {
+							payload = (uint8_t*) calloc (1, MAX_BUFFER_SIZE);
+							payloadLen = build_VID_ADVT_PAYLOAD(payload, interfaceNames[i]);
+							if (payloadLen) {
+								ctrlSend(interfaceNames[i], payload, payloadLen, vlanID);
+							}
+							free(payload);
+							}
+		}
 		} else {
 			printf ("Error: Provide ROOT Switch ID ./main <non MTS/root MTS> <ROOT MTS ID>\n");
 			exit(1);
