@@ -100,16 +100,16 @@ int main (int argc, char** argv) {
 		// Check if Root VID is provided through CLI.
 		if (argv[2] != NULL) {
 			printf ("ROOT MTVID: %s\n", argv[2]);
-			printf ("** 0 **\n");
+
 			for (int vlanID=1; vlanID<=vlanCount; i++) {
-						printf ("** 1 **\n");
+
 						//Allocate memory for vlan_tuple
 						struct vlan_tuple *new_node = (struct vlan_tuple*) calloc (1, sizeof(struct vlan_tuple));
 
 						// Allocate memory and intialize(calloc).
 						//struct vid_addr_tuple *new_node = (struct vid_addr_tuple*) calloc (1, sizeof(struct vid_addr_tuple));
 
-						printf ("** 2 **\n");
+						printf ("** 1 **\n");
 						// Fill data.
 						strncpy(new_node->vid->vid_addr, argv[2], strlen(argv[2]));
 						strcpy(new_node->vid->eth_name, "self");   	// own interface, so mark it as self, will be helpful while tracking own VIDs.
@@ -119,9 +119,11 @@ int main (int argc, char** argv) {
 						new_node->vid->isNew = true;
 						new_node->vid->path_cost = PATH_COST;
 
+						printf ("** 2 **\n");
 						// Add into VID Table.
 						if (vlanID==atoi(argv[2]))
 								(new_node->vid);
+						printf ("** 3 **\n");
 
 						i = 0;
 						uint8_t *payload = NULL;
