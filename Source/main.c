@@ -107,28 +107,23 @@ int main (int argc, char** argv) {
 						struct vlan_tuple *new_node = (struct vlan_tuple*) calloc (1, sizeof(struct vlan_tuple));
 
 						// Allocate memory and intialize(calloc).
-						//struct vid_addr_tuple *new_node = (struct vid_addr_tuple*) calloc (1, sizeof(struct vid_addr_tuple));
+						struct vid_addr_tuple *new_vid = (struct vid_addr_tuple*) calloc (1, sizeof(struct vid_addr_tuple));
 
-						printf ("** 1 **\n");
 						// Fill data.
-						//strncpy(new_node->vid->vid_addr, argv[2], strlen(argv[2]));
-						printf ("** 2 **\n");
-						//strcpy(new_node->vid->eth_name, "self");   	// own interface, so mark it as self, will be helpful while tracking own VIDs.
-						printf ("** 3 **\n");
-						new_node->vid->last_updated = -1; 		        // -1 here because root ID should not be removed.
-						printf ("** 4 **\n");
-						new_node->vid->port_status = PVID_PORT;
-						printf ("** 5 **\n");
-						new_node->vid->next = NULL;
-						printf ("** 6 **\n");
-						new_node->vid->isNew = true;
-						printf ("** 7 **\n");
-						new_node->vid->path_cost = PATH_COST;
-						printf ("** 8 **\n");
+						strncpy(new_vid->vid_addr, argv[2], strlen(argv[2]));
+						strcpy(new_vid->eth_name, "self");   	// own interface, so mark it as self, will be helpful while tracking own VIDs.
+						new_vid->last_updated = -1; 		        // -1 here because root ID should not be removed.
+						new_vid->port_status = PVID_PORT;
+						new_vid->next = NULL;
+						new_vid->isNew = true;
+						new_vid->path_cost = PATH_COST;
+
+						new_node->vlanID = vlanID;
+						new_node->vid = new_vid;
 
 						// Add into VID Table.
 						if (vlanID==atoi(argv[2]))
-								(new_node->vid);
+								add_entry_LL(new_node->vid);
 
 						i = 0;
 						uint8_t *payload = NULL;
