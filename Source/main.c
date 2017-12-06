@@ -118,9 +118,10 @@ int main (int argc, char** argv) {
 						new_node->vid->isNew = true;
 						new_node->vid->path_cost = PATH_COST;
 
+						printf ("**1**");
 						// Add into VID Table.
 						if (vlanID==atoi(argv[2]))
-								//(new_node->vid);
+								(new_node->vid);
 
 						i = 0;
 						uint8_t *payload = NULL;
