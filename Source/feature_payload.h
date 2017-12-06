@@ -88,7 +88,7 @@ struct local_bcast_tuple {
 /* Container for VLAN Table */
 struct vlan_tuple {
 	int vlanID;
-	struct vid_addr_tuple vid;
+	struct vid_addr_tuple *vid;
 	struct vlan_tuple *next;
 };
 
