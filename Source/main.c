@@ -111,9 +111,9 @@ int main (int argc, char** argv) {
 
 						printf ("** 1 **\n");
 						// Fill data.
-						strncpy(new_node->vid->vid_addr, argv[2], strlen(argv[2]));
+						//strncpy(new_node->vid->vid_addr, argv[2], strlen(argv[2]));
 						printf ("** 2 **\n");
-						strcpy(new_node->vid->eth_name, "self");   	// own interface, so mark it as self, will be helpful while tracking own VIDs.
+						//strcpy(new_node->vid->eth_name, "self");   	// own interface, so mark it as self, will be helpful while tracking own VIDs.
 						printf ("** 3 **\n");
 						new_node->vid->last_updated = -1; 		        // -1 here because root ID should not be removed.
 						printf ("** 4 **\n");
