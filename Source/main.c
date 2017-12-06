@@ -120,7 +120,7 @@ int main (int argc, char** argv) {
 
 						// Add into VID Table.
 						if (vlanID==atoi(argv[2]))
-								add_entry_LL(new_node);
+								//(new_node->vid);
 
 						i = 0;
 						uint8_t *payload = NULL;
