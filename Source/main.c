@@ -119,7 +119,7 @@ int main (int argc, char** argv) {
 						new_node->vid->path_cost = PATH_COST;
 
 						// Add into VID Table.
-						if (vlanID==argv[2])
+						if (vlanID==atoi(argv[2]))
 								add_entry_LL(new_node->vid);
 
 						i = 0;
